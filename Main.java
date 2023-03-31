@@ -1,21 +1,23 @@
-class Main {
-  public static void main(String args[]) {
-    // without using functions
-    power(5, 3);
-    power(2, 5);
-    power(2, 1);
-    power(2, 6);
-    // using functions
-    System.out.println(String.valueOf(Math.pow(5, 2)));
-  }
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-  public static void power(int y, int x) {
-    // 2 power 1 = 2
-    int factor = 1;
-    for (int i = 0; i < x; i++) {
-      factor *= y;
-    }
-    System.out.println(String.valueOf(y) + " power " + String.valueOf(x) + " = " + String.valueOf(factor));
+class Main {
+
+  public static void main(String args[]) {
+
+    List<String> list1 = new ArrayList(Arrays.asList("Ash", "Ashirvad", "Anshuman", "Andrew", "Basha", "Bala"));
+    List<String> list2 = new ArrayList(Arrays.asList("Mantra", "Rahul", "Degga", "Sinduri", "Maasha", "Donald"));
+    List<String> list3 = new ArrayList(Arrays.asList("Biden", "Kalpana", "Simham", "Ajju", "Sitara", "Priyanka"));
+    List<String> list4 = new ArrayList(Arrays.asList("Trump", "Virat", "Ajay", "Mouli", "Bhosle", "Banu"));
+
+    List<String> resultlist = Stream.of(list1, list2, list3, list4)
+        .flatMap(Collection::stream)
+        .filter(entry -> entry.startsWith("A"))
+        .collect(Collectors.toList());
+
+    resultlist.stream().forEach(System.out::println);
   }
 
 }
